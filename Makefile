@@ -1,7 +1,7 @@
 APP = restapi
 
 test:
-	@flake8 . --exclude .venv
+	@pytest -v --disable-warnings
 
 compose-up:
 	@docker compose build
