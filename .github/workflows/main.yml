@@ -32,6 +32,8 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Deploy to heroku
-        run: make heroku
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
+          make heroku
         env: 
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
