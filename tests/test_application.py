@@ -55,3 +55,14 @@ class TestApplication:
         response = client.get("/user/%s" % invalid_user["cpf"])
         assert response.status_code == 400
         assert b"User does not exist in database!" in response.data
+
+    def test_patch_user(self, client, valid_user):
+        valid_user["first_name"] = "Dantão"
+        response = client.patch("/user", json=valid_user)
+        assert response.status_code == 200
+        assert b"updated" in response.data
+
+        valid_user["cpf"] = "311.264.560-04"
+        response = client.patch("/user", json=valid_user)
+        assert response.status_code == 400
+        assert b"does not exist in database" in response.data
